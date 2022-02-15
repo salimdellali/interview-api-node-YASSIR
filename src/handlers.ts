@@ -5,9 +5,8 @@ export async function getPokemonByName(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  var name: string = request.params["name"];
-
-  const http = require("http");
+  const https = require("https");
+  const name: string = request.params["name"];
 
   http.request(
     { ...reply.headers, ...{ hostname: urlApiPokeman, port: 80 } },
