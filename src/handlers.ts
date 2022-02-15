@@ -47,7 +47,7 @@ export async function getPokemonByName(
 }
 
 export const computeResponse = async (
-  response: unknown,
+  response: any,
   reply: FastifyReply
 ) => {
   const resp = response as any;
