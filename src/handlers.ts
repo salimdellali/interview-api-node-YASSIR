@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { PokemonWithStats } from "models/PokemonWithStats";
+import PokemonWithStats from "models/PokemonWithStats";
 
 export async function getPokemonByName(
   request: FastifyRequest,
@@ -17,7 +17,7 @@ export async function getPokemonByName(
       });
 
       result.on("end", () => {
-        const pokemon = JSON.parse(Buffer.concat(data).toString());
+        const pokemon: PokemonWithStats = JSON.parse(Buffer.concat(data).toString());
         reply.send(pokemon);
       });
     })

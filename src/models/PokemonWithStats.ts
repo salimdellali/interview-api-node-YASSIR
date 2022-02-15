@@ -1,16 +1,26 @@
-import { Species } from "./Species";
-import { Stat } from "./Stat";
-
-export class PokemonWithStats {
-  constructor(
+type PokemonWithStats = {
     name: String,
     height: number,
-    base_experience: number,
-    averageBaseExperience: number,
+    baseExperience: number,
     id: number,
-    sprite_img: string,
+    spriteFrontDefaultImg: String,
     species: Species,
-    url: string,
-    stats: Array<Stat>
-  ) {}
+    stats: Array<Stat>,
+    statsAverage: number
 }
+
+type Species = {
+  name: String;
+  url: String;
+};
+
+type Stat = {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name : String;
+    url: String;
+  }
+}
+
+export default PokemonWithStats;
