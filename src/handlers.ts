@@ -17,7 +17,7 @@ export async function getPokemonByName(
       });
 
       result.on("end", () => {
-        const pokemon: PokemonWithStats = JSON.parse(Buffer.concat(data).toString());
+        const pokemon: PokemonWithStats = buildPokemon(data);
         reply.send(pokemon);
       });
     })
@@ -26,48 +26,15 @@ export async function getPokemonByName(
     });
 }
 
-export const computeResponse = async (
-  response: any,
-  reply: FastifyReply
-) => {
-  const resp = response as any;
+const buildPokemon = (data) => {
+  const parsedData = JSON.parse(Buffer.concat(data).toString());
+  const { name, height, base_experience, id, species, sprites, stats } = parsedData;
 
-  let types = resp.types
-    .map((type) => type.type)
-    .map((type) => {
-      return type.url;
-    })
-    .reduce((types, typeUrl) => types.push(typeUrl));
+  return {
+    name, height, baseExperience: base_experience, id, spriteFrontDefaultImg: sprites.front_default, species, stats, statsAverage: getStatsAverage(stats)
+  }
+}
 
-  let pokemonTypes = [];
-
-  types.forEach((element) => {
-    const http = require("http");
-    const keepAliveAgent = new http.Agent({ keepAlive: true });
-
-    http.request({ hostname: element }, (response) =>
-      pokemonTypes.push(response)
-    );
-  });
-
-  if (pokemonTypes == undefined) throw pokemonTypes;
-
-  response.stats.forEach((element) => {
-    var stats = [];
-
-    pokemonTypes.map((pok) =>
-      pok.stats.map((st) =>
-        st.stat.name.toUpperCase() == element.stat.name
-          ? stats.push(st.base_state)
-          : []
-      )
-    );
-
-    if (stats) {
-      let avg = stats.reduce((a, b) => a + b) / stats.length;
-      element.averageStat = avg;
-    } else {
-      element.averageStat = 0;
-    }
-  });
-};
+const getStatsAverage = (stats) => {
+  return stats.reduce((acc, cur) => acc + cur.base_stat, 0) / stats.length;
+}
