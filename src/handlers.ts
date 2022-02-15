@@ -8,22 +8,22 @@ export async function getPokemonByName(
   const https = require("https");
   const name: string = request.params["name"];
 
-  http.request(
-    { ...reply.headers, ...{ hostname: urlApiPokeman, port: 80 } },
-    (result) => {
-      response = result;
-    }
-  );
+  https
+    .get(`https://pokeapi.co/api/v2/pokemon/${name}`, (result) => {
+      let data = [];
 
-  if (response == null) {
-    reply.code(404);
-  }
+      result.on("data", (dataChunck) => {
+        data.push(dataChunck);
+      });
 
-  computeResponse(response, reply);
-
-  reply.send(response);
-
-  return reply;
+      result.on("end", () => {
+        const pokemon = JSON.parse(Buffer.concat(data).toString());
+        reply.send(pokemon);
+      });
+    })
+    .on("error", (err) => {
+      console.error("Error: ", err.message);
+    });
 }
 
 export const computeResponse = async (
