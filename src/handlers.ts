@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import PokemonWithStats from "models/PokemonWithStats";
+import PokemonWithStats, { Stat } from "models/PokemonWithStats";
 
 export async function getPokemonByName(
   request: FastifyRequest,
@@ -15,9 +15,9 @@ export async function getPokemonByName(
 
   https
     .get(`https://pokeapi.co/api/v2/pokemon/${name}`, (result) => {
-      let data = [];
+      let data: Buffer[] = [];
 
-      result.on("data", (dataChunck) => {
+      result.on("data", (dataChunck: Buffer) => {
         data.push(dataChunck);
       });
 
@@ -31,14 +31,14 @@ export async function getPokemonByName(
         reply.send(pokemon);
       });
     })
-    .on("error", (err) => {
+    .on("error", (err: Error) => {
       console.error("Error: ", err.message);
       sendError(reply, "Something went wrong ¯\_(ツ)_/¯", 500);
       return;
     });
 }
 
-const buildPokemon = (data) => {
+const buildPokemon = (data: Buffer[]) => {
   const parsedData = JSON.parse(Buffer.concat(data).toString());
   const { name, height, base_experience, id, species, sprites, stats } = parsedData;
 
@@ -47,11 +47,11 @@ const buildPokemon = (data) => {
   }
 }
 
-const getStatsAverage = (stats) => {
+const getStatsAverage = (stats: Array<Stat>) => {
   return stats.reduce((acc, cur) => acc + cur.base_stat, 0) / stats.length;
 }
 
-const sendError = (reply, errorMessage, statusCode) => {
+const sendError = (reply: FastifyReply, errorMessage: string, statusCode: number) => {
   reply.statusCode = statusCode;
   reply.send({ errorMessage });
 }

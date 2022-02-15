@@ -14,7 +14,7 @@ type Species = {
   url: String;
 };
 
-type Stat = {
+export type Stat = {
   base_stat: number;
   effort: number;
   stat: {
