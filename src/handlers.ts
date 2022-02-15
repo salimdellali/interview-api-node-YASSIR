@@ -7,26 +7,7 @@ export async function getPokemonByName(
 ) {
   var name: string = request.params["name"];
 
-  reply.headers["Accept"] = "application/json";
-
-  var urlApiPokeman = `https://pokeapi.co/api/v2/pokemon/`;
-
-  var params = {};
-
-  name == null
-    ? name.trim() != ""
-      ? ((params["name"] = name),
-        (urlApiPokeman = urlApiPokeman + "/"),
-        (urlApiPokeman = urlApiPokeman + name))
-      : ((urlApiPokeman = urlApiPokeman + '"?offset=20"'),
-        (urlApiPokeman = urlApiPokeman + "&limit=20"))
-    : ((urlApiPokeman = urlApiPokeman + '"?offset=20"'),
-      (urlApiPokeman = urlApiPokeman + "&limit=20"));
-
   const http = require("http");
-  const keepAliveAgent = new http.Agent({ keepAlive: true });
-
-  let response: any = "";
 
   http.request(
     { ...reply.headers, ...{ hostname: urlApiPokeman, port: 80 } },
