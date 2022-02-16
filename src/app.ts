@@ -4,7 +4,7 @@ import fastify, {
   FastifyInstance,
 } from "fastify";
 import { Server, IncomingMessage, ServerResponse } from "http";
-import router from "./router";
+import router from "./routes/router";
 
 const serverOptions: FastifyServerOptions<Server, FastifyLoggerInstance> = {
   // Logger only for production

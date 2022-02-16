@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import PokemonWithStats, { Stat } from "models/PokemonWithStats";
+import { sendError } from "helpers/helpers";
 
 export async function getPokemonByName(
   request: FastifyRequest,
@@ -49,9 +50,4 @@ const buildPokemon = (data: Buffer[]) => {
 
 const getStatsAverage = (stats: Array<Stat>) => {
   return stats.reduce((acc, cur) => acc + cur.base_stat, 0) / stats.length;
-}
-
-const sendError = (reply: FastifyReply, errorMessage: string, statusCode: number) => {
-  reply.statusCode = statusCode;
-  reply.send({ errorMessage });
 }
