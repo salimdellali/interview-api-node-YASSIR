@@ -11,7 +11,7 @@
 
 ## Project structure
 - `src/handlers/`: holds the actions to take when hitting the endpoints
-- `src/helpers/`: holds usefull functions that can be used all over the project
+- `src/helpers/`: holds usefull functions that can be used allover the project
 - `src/models/`: holds the data schemas definitions
 - `src/routes/`: holds the possible routes the Rest API can provide
 - `src/tests/Rest API testing/`: holds insctructions on how to test this Rest API
@@ -56,6 +56,6 @@ $ npm run prod
 
 check the commits history for more details
 ## Last Note
-- I had a lot of fun solving this challenge, I decided to not rush and take the time I needed to craft the best code I could (of course withing the time frame allowed)
+- I had a lot of fun solving this challenge, I decided to not rush and take the time I needed to craft the best code I could (of course within the time frame allowed)
 - Hope my solution will meet your expectations
 - Built with <3 and excitement by @salimdellali
