@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "3eed1358-817e-4d60-bc52-8fe703709edf",
+		"name": "Rest API Tests - Salim DELLALI - YASSIR interview Api Node Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get pikachu",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"expect response code to be 200\", () => {\r",
+							"    pm.expect(pm.response.code).to.equal(200)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"let jsonResponse = pm.response.json();\r",
+							"console.log(jsonResponse)\r",
+							"pm.test(\"Response should be a parsable JSON\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should be an object\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/poke/pikachu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"poke",
+						"pikachu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get weedle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"expect response code to be 200\", () => {\r",
+							"    pm.expect(pm.response.code).to.equal(200)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"let jsonResponse = pm.response.json();\r",
+							"pm.test(\"Response should be a parsable JSON\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should be an object\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/poke/weedle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"poke",
+						"weedle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get lugia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"expect response code to be 200\", () => {\r",
+							"    pm.expect(pm.response.code).to.equal(200)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"let jsonResponse = pm.response.json();\r",
+							"pm.test(\"Response should be a parsable JSON\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body should be an object\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/poke/lugia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"poke",
+						"lugia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get pokemon with wrong name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"expect response code to be 404\", () => {\r",
+							"    pm.expect(pm.response.code).to.equal(404)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"let jsonResponse = pm.response.json();\r",
+							"pm.test(\"Response body should be an object\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/poke/WRONGNAME",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"poke",
+						"WRONGNAME"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get empty input pokemon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"expect response code to be 400\", () => {\r",
+							"    pm.expect(pm.response.code).to.equal(400)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-Type is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"let jsonResponse = pm.response.json();\r",
+							"pm.test(\"Response body should be an object\", function() {\r",
+							"    pm.expect(jsonResponse).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/poke/     ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"poke",
+						"     "
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
