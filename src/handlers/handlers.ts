@@ -7,13 +7,14 @@ export async function getPokemonByName(
   reply: FastifyReply
 ) {
   const https = require("https");
-  const name: string = request.params["name"];
+  let name: string = request.params["name"];
 
   if (name === null || name.trim() === "") {
     sendError(reply, "Please set a valid pokemon name", 400);
     return;
   }
 
+  name = name.toLowerCase();
   https
     .get(`https://pokeapi.co/api/v2/pokemon/${name}`, (result) => {
       let data: Buffer[] = [];
