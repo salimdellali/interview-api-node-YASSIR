@@ -34,22 +34,37 @@ export async function getPokemonByName(
     })
     .on("error", (err: Error) => {
       console.error("Error: ", err.message);
-      sendError(reply, "Something went wrong ¯\_(ツ)_/¯", 500);
+      sendError(reply, "Something went wrong ¯_(ツ)_/¯", 500);
       return;
     });
 }
 
 const buildPokemon = (data: Buffer[]): PokemonWithStats => {
   const parsedData = JSON.parse(Buffer.concat(data).toString());
-  const { name, height, base_experience, id, species, sprites, stats } = parsedData;
+  const {
+    name,
+    height,
+    base_experience,
+    id,
+    species,
+    sprites,
+    stats,
+  } = parsedData;
 
   return {
-    name, height, baseExperience: base_experience, id, spriteFrontDefaultImg: sprites.front_default, species, stats, statsAverage: getStatsAverage(stats)
-  }
-}
+    name,
+    height,
+    baseExperience: base_experience,
+    id,
+    spriteFrontDefaultImg: sprites.front_default,
+    species,
+    stats,
+    statsAverage: getStatsAverage(stats),
+  };
+};
 
 const getStatsAverage = (stats: Array<Stat>): number => {
   // if by any mean the stats array is empty, return 0;
   if (!stats.length) return 0;
   return stats.reduce((acc, cur) => acc + cur.base_stat, 0) / stats.length;
-}
+};
